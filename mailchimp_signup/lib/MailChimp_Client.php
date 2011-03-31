@@ -100,7 +100,9 @@ class MailChimp_Client {
 		}
 		$merge = array_values($member->createMergeArray($this));
 		array_unshift($merge, date('r', time()));
-		/*$handle = @fopen('php://memory', 'w+');
+		
+		/// Convert to CSV using fputcsv
+		$handle = @fopen('php://memory', 'w+');
 		if(!$handle) {
 			return false;
 		}
@@ -109,9 +111,11 @@ class MailChimp_Client {
 			fclose($handle);
 			return false;
 		}
+		rewind($handle);
 		$csv = trim(fread($handle, $written + 1)) . "\n";
-		fclose($handle);*/
+		fclose($handle);
 		
+		/*
 		$csv = array();
 		foreach($merge as $v) {
 			if(is_array($v)) {
@@ -119,7 +123,7 @@ class MailChimp_Client {
 			}
 			$csv[] = '"' . addcslashes('' . $v, '"\\') . '"';
 		}
-		$csv = implode(',', $csv) . "\n";
+		$csv = implode(',', $csv) . "\n";*/
 		
 		return @file_put_contents($this->log, $csv, FILE_APPEND);
 	}

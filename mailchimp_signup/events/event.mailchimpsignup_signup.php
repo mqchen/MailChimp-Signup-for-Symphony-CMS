@@ -80,18 +80,20 @@ class eventMailChimpSignup_Signup extends Event {
 			$merge[strtoupper($key)] = $value;
 		}
 		
-		$member = new MailChimp_Member($email, $merge, array($eventId));
-		
 		// Client
 		$client = MailChimp_Utils::instance()->getMailChimpClient($sectionConfig['listid']);
 		$client->groupingsName = $sectionConfig['groupingsname'];
 		
 		// Check if member exists
-		if($client->getMember($member->email) != null) {
+		$member = $client->getMember($email);
+		if($member !== null) {
+			// Add the new event to the member
+			$member->addEvent($eventId);
 			$ret = $client->updateMember($member);
 			$newMember = false;
 		}
 		else {
+			$member = new MailChimp_Member($email, $merge, array($eventId));
 			$ret = $client->addMember($member);
 			$newMember = true;
 		}

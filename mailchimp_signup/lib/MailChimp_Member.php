@@ -6,6 +6,7 @@ require_once dirname(__FILE__) . '/MailChimp_Client.php';
 class MailChimp_Member {
 	public $email;
 	public $merge = array();
+	public $events = array();
 	
 	
 	public function __construct($email, array $merge, array $events = array()) {

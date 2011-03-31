@@ -37,7 +37,7 @@ class MailChimp_Client {
 	
 	public function getMember($memberEmail) {
 		$ret = $this->api->listMemberInfo($this->listId, $memberEmail);
-
+		
 		$this->checkForError();
 		
 		if(array_key_exists("data", $ret)) {
@@ -70,7 +70,7 @@ class MailChimp_Client {
 		// Add the OPTIN field
 		$merge['OPTINIP'] = $_SERVER['REMOTE_ADDR'];
 		
-		$ret = $this->api->listSubscribe($this->listId, $member->email, $merge, 'html', false, false, true, true);
+		$ret = $this->api->listSubscribe($this->listId, $member->email, $merge, 'html', false, true, true, true);
 		
 		return !$this->checkForError(false);
 	}
@@ -130,8 +130,8 @@ class MailChimp_Client {
 	
 	public static function getIdFromGroupName($groupName) {
 		
-		if(preg_match("/^.+\([0-9]+\)$/", $groupName)) {
-			return intval(preg_replace("/^.+\(([0-9]+)\)$/", "\\1", $groupName));
+		if(preg_match("/^.*\([0-9]+\)$/", $groupName)) {
+			return intval(preg_replace("/^.*\(([0-9]+)\)$/", "\\1", $groupName));
 		}
 		
 		return null;

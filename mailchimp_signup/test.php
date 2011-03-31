@@ -4,14 +4,14 @@ header("Content-type: text/plain");
 
 require_once 'lib/MailChimp_Client.php';
 require_once 'lib/MailChimp_WelcomeEmail.php';
-
+/*
 $w = new MailChimp_WelcomeEmail(5, 197, 'supersecretkey');
 var_dump($w->send('mq.chen@gmail.com', 'Hello'));
+*/
 
-/*
-$apiKey = '3195d0a4072e215253a9e6f73a6dc734-us2';
-$listId = 'a748c5d5a7';
-$email = 'mqchen+test@gmail.com';
+$apiKey = 'd79bf30d6167d6af8e3133a082c78442-us2';
+$listId = '4b1f39ae7f';
+$email = 'mqchen+test2@gmail.com';
 
 
 
@@ -19,11 +19,13 @@ $m = new MailChimp_Client($apiKey, $listId);
 
 
 // Add member
-/*$member = new MailChimp_Member('mqchen+testing2@gmail.com', 'Test2', 'Testing2', '123123123', 'I want to sell ice cream!');
-$member->addEvent(1337);
+$member = new MailChimp_Member($email, 'Test2', 'Testing2', '123123123', 'I want to sell ice cream!');
+$member->addEvent(199);
+
+print_r($member);
 
 $m->addMember($member);
-*/
+
 /*
 $m->groupinsName = 'Events';
 

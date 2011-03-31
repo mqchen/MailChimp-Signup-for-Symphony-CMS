@@ -99,7 +99,7 @@ class MailChimp_Client {
 			$this->log = MANIFEST . '/logs/' . __CLASS__ . '-log.csv';
 		}
 		$merge = array_values($member->createMergeArray($this));
-		array_unshift($merge, date('r', time()));
+		array_unshift($merge, date('r', time()), $member->email, implode(',', $member->events));
 		
 		/// Convert to CSV using fputcsv
 		$handle = @fopen('php://memory', 'w+');
